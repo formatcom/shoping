@@ -52,10 +52,10 @@
                 <input name="p_confirm_method" type="hidden" value="POST">
                 <!-- -->
                 <input name="p_url_response" type="hidden"
-                value="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'item_list' %}">
+                value="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'confirmation' %}">
                 <!-- -->
                 <input name="p_url_confirmation" type="hidden"
-                value="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'confirmation' %}">
+                value="{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% url 'item_list' %}">
                 <!-- -->
                 <input type="image" id="imagen" src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/boton_carro_de_compras_epayco2.png" />
             </form>

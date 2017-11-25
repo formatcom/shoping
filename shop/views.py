@@ -2,6 +2,7 @@
 from django.views.generic import ListView
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Sum
 from .models import Item
 
@@ -30,6 +31,7 @@ class CarShopListView(ListView):
 
 
 @require_POST
+@csrf_exempt
 def confirmation_view(request):
     print(request.POST)
     return HttpResponse('')
