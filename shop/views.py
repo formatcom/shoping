@@ -124,15 +124,16 @@ def confirmation_view(request):
     h.update(signature.encode('utf-8'))
     v_signature = h.hexdigest()
 
-    print(x_signature)
-    print(v_signature)
     ticket = Ticket.objects.filter(pk=int(x_id_invoice)).first()
-    print(ticket)
 
+    print(ticket.total)
+    print(x_amount)
     if ticket and v_signature == x_signature:
         ticket.status = Status(int(x_cod_response))
         ticket.save()
         return HttpResponse('Gracias por su compra')
     else:
-        return HttpResponse('Datos no validos')
+        ticket.status = Status(Status.FAILED)
+        ticket.save()
+        return HttpResponse('Firma invalida')
 

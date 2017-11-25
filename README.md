@@ -1,32 +1,24 @@
-# Heroku Django Starter Template
+## Como usar en local
 
-An utterly fantastic project starter template for Django 1.11.
+Para usar esta proyecto, siga estos pasos:
 
-## Features
+1. virtualenv env
+2. pip install -r requirements.txt
+3. heroku login
+4. heroku local
+5. configurar en el /admin epayco
 
-- Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
-- Enhancements to Django's static file serving functionality via WhiteNoise.
-- Latest Python 3.6 runtime environment. 
+## Tarjetas de Credito de Pruebas
 
-## How to Use
+[Docs epayco/testing](https://docs.epayco.co/tools/testing)
 
-To use this project, follow these steps:
 
-1. Create your working environment.
-2. Install Django (`$ pip install django`)
-3. Create a new project using this template
+## Estandar Webcheckout
 
-## Creating Your Project
+[Docs epayco/standard_checkout](https://epayco.co/docs/standard_checkout/#introduction)
 
-Using this template to create a new Django app is easy::
 
-    $ django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile helloworld
-
-(If this doesn't work on windows, replace `django-admin.py` with `django-admin`)
-
-You can replace ``helloworld`` with your desired project name.
-
-## Deployment to Heroku
+## Deployment en Heroku
 
     $ git init
     $ git add -A
@@ -36,15 +28,13 @@ You can replace ``helloworld`` with your desired project name.
     $ git push heroku master
 
     $ heroku run python manage.py migrate
+    $ heroku run python manage.py createsuperuser
 
 See also, a [ready-made application](https://github.com/heroku/python-getting-started), ready to deploy.
 
-## Using Python 2.7?
-
-Just update `runtime.txt` to `python-2.7.13` (no trailing spaces or newlines!).
-
 
 ## License: MIT
+
 
 ## Further Reading
 
