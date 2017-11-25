@@ -25,4 +25,4 @@ class Ticket(models.Model):
     status = models.ForeignKey(Status)
 
     def __str__(self):
-        return self.pk
+        return '%s' % self.pk
