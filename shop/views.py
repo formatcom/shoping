@@ -1,16 +1,20 @@
 #http://ccbv.co.uk
 from django.views.generic import ListView
 from django.http import HttpResponse
+from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Sum
 from .models import Item
 
 
-@csrf_exempt
 class ItemListView(ListView):
     model = Item
     template_name = 'shop/item_list.html'
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(ItemListView, self).dispatch(*args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         print(request.POST)
