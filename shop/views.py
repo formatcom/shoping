@@ -45,7 +45,7 @@ def carShopSecurity(request):
 
     ticket = Ticket()
     ticket.total = queryset.aggregate(Sum('price'))['price__sum']
-    ticket.status = Status.PENDING
+    ticket.status = Status(Status.PENDING)
     ticket.save()
     ticket.items.set(queryset)
 
@@ -128,7 +128,7 @@ def confirmation_view(request):
     print(ticket)
 
     if ticket and v_signature == x_signature:
-        ticket.status = int(x_cod_response)
+        ticket.status = Status(int(x_cod_response))
         ticket.save()
         return HttpResponse('Gracias por su compra')
     else:
