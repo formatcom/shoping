@@ -1,0 +1,31 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+	<form method="post" action="{% url 'car_shop' %}">
+		{% csrf_token %}
+		<div class="container">
+			<div class="row">
+				{% for item in object_list %}
+					<div class="col-sm-12 col-md-3">
+						<ul class="list-group">
+							<li class="list-group-item">
+								<img src="{{ item.cover_x256.url }}" width=100% />
+							</li>
+							<li class="list-group-item">nombre: {{ item.name }}</li>
+							<li class="list-group-item">precio: {{ item.price }} COP</li>
+							<li class="list-group-item">
+								<input id={{ item.pk }} value={{ item.pk }}
+									type="checkbox" name="item"/>
+
+								<label for={{ item.pk }}> Agregar al carrito </label>
+							</li>
+						</ul>
+					</div>
+				{% empty %}
+					<div class="col-sm-12">No hay articulos todavia.</div>
+				{% endfor %}
+			</div>
+		</div>
+		<input value="Ir al carrito" type="submit" />
+	</form>
+{% endblock content %}
