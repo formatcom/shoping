@@ -17,10 +17,10 @@
                 {% for item in object_list %}
                     <tr>
                         <td>{{item.name}}</td>
-                        <td>{{iem.price}}</td>
+                        <td>{{item.price}}</td>
                         <td>
                             <a href="{{item.cover}}" target="_blank">
-                                <img src="{{ item.cover }}" width=100% />
+                                <img src="{{ item.cover }}" width=60px height=60px />
                             </a>
                         </td>
                     </tr>
@@ -28,11 +28,13 @@
                 {% empty %}
                     <div class="col-sm-12">No hay articulos todavia.</div>
                 {% endfor %}
+                <tr>
+                    <td class="align-right" colspan="3"><strong>total:<strong> {{total}}</td>
+                </tr>
                 </tbody>
                 </table>
         </div>
         {% if total %}
-                precio total: {{ total }} COP
                 <input type="image" src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/boton_carro_de_compras_epayco2.png" />
         {% endif %}
         </form>
