@@ -135,7 +135,8 @@ def confirmation_view(request):
         ticket.save()
         return HttpResponse('Gracias por su compra')
     else:
-        ticket.status = Status(Status.FAILED)
-        ticket.save()
+        if ticket:
+            ticket.status = Status(Status.FAILED)
+            ticket.save()
         return HttpResponse('Firma invalida')
 
