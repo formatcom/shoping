@@ -8,6 +8,10 @@ Para usar esta proyecto, siga estos pasos:
 4. heroku local
 5. configurar en el /admin epayco
 
+## Usuario de prueba
+username: apps.co
+password: password
+
 ## Tarjetas de Credito de Pruebas
 
 [Docs epayco/testing](https://docs.epayco.co/tools/testing)
