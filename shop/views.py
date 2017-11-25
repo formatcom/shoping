@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Sum
+from decimal import Decimal
 from epayco.models import EpayCo
 from ticket.models import Ticket, Status
 from .models import Item
@@ -126,9 +127,10 @@ def confirmation_view(request):
 
     ticket = Ticket.objects.filter(pk=int(x_id_invoice)).first()
 
-    print(ticket.total)
-    print(x_amount)
-    if ticket and v_signature == x_signature:
+    if (ticket and
+        v_signature == x_signature and
+        ticket.total == Decimal(x_amount):
+
         ticket.status = Status(int(x_cod_response))
         ticket.save()
         return HttpResponse('Gracias por su compra')

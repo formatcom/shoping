@@ -4,8 +4,11 @@ from .models import Item
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     readonly_fields = ('preview', )
-    list_display = ('name', 'price', 'preview')
+    list_display = ('name', 'price', 'price_type', 'preview')
     ordering = ('price',)
+
+    def price_type(self, obj):
+        return obj.price == Decimal('160000.00')
 
     def preview(self, obj):
         return '''
