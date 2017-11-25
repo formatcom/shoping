@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Item
 
 @admin.register(Item)
-class  ItemAdmin(admin.ModelAdmin):
+class ItemAdmin(admin.ModelAdmin):
     readonly_fields = ('preview', )
     list_display = ('name', 'price', 'preview')
     ordering = ('price',)
