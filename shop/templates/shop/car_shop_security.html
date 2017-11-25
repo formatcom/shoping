@@ -9,20 +9,6 @@
     </script>
 {% endblock header %}
 
-    context = {
-            'p_cust_id_cliente': p_cust_id_cliente,
-            'p_key': p_key,
-            'p_id_invoice': p_id_invoice,
-            'p_amount': p_amount,
-            'p_currency_code': p_currency_code,
-            'p_signature': p_signature,
-            'p_tax': p_tax,
-            'p_amount_base': p_amount_base,
-            'p_test_request': p_test_request,
-            'p_url_response': p_url_response,
-            'p_url_confirmation': p_url_confirmation
-    }
-
 {% block content %}
     <form id="frm_botonePayco" name="frm_botonePayco" method="post" action="https://secure.payco.co/checkout.php">
         <!-- Id del comercio propietario de la aplicación -->
