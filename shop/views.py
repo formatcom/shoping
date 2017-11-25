@@ -97,10 +97,12 @@ def carShopSecurity(request):
 @require_POST
 @csrf_exempt
 def confirmation_view(request):
+    epayco = EpayCo.objects.first()
+
     x_signature = request.POST.get('x_signature')
 
     x_cust_id_cliente = request.POST.get('x_cust_id_cliente')
-    x_key = request.POST.get('x_key')
+    x_key = epayco.p_key
     x_id_invoice = request.POST.get('x_id_invoice')
     x_ref_payco = request.POST.get('x_ref_payco')
     x_transaction_id = request.POST.get('x_transaction_id')
