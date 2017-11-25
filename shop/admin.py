@@ -9,7 +9,7 @@ class  ItemAdmin(admin.ModelAdmin):
 
     def preview(self, obj):
         return '''
-        <a href="{0}" target="_blank"><img src={1} width=20% /></a>
-        '''.format(obj.cover.url, obj.cover_x256.url)
+        <a href="{0}" target="_blank"><img src={0} width=20% /></a>
+        '''.format(obj.cover)
 
     preview.allow_tags = True
