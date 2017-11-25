@@ -9,20 +9,13 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Sum
 from epayco.models import EpayCo
+from ticket.models import Ticket, Status
 from .models import Item
 
 
 class ItemListView(ListView):
     model = Item
     template_name = 'shop/item_list.html'
-
-    @method_decorator(csrf_exempt)
-    def dispatch(self, *args, **kwargs):
-        return super(ItemListView, self).dispatch(*args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        print(request.POST)
-        return self.get(request, args, kwargs)
 
 
 class CarShopListView(ListView):
@@ -42,6 +35,7 @@ class CarShopListView(ListView):
         queryset = self.model.objects.filter(pk__in=items)
         return queryset
 
+
 @require_POST
 def carShopSecurity(request):
     template_name = 'shop/car_shop_security.html'
@@ -50,12 +44,18 @@ def carShopSecurity(request):
 
     epayco = EpayCo.objects.first()
 
+    ticket = Ticket()
+    ticket.total = queryset.aggregate(Sum('price'))['price__sum']
+    ticket.status = Status.PENDING
+    ticket.save()
+    ticket.items.set(queryset)
+
     p_description = 'demo-app-co ePayCo'
 
     p_cust_id_cliente = epayco.client_id
     p_key = epayco.p_key
-    p_id_invoice = ''
-    p_amount = queryset.aggregate(Sum('price'))['price__sum']
+    p_id_invoice = '%s' % ticket.pk
+    p_amount = '%s' % ticket.total
     p_currency_code = epayco.p_currency_code
 
     signature = '{0}^{1}^{2}^{3}^{4}'.format(
@@ -98,5 +98,40 @@ def carShopSecurity(request):
 @require_POST
 @csrf_exempt
 def confirmation_view(request):
-    print(request.POST)
-    return HttpResponse('')
+    x_signature = request.POST.get('x_signature')
+
+    x_cust_id_cliente = request.POST.get('x_cust_id_cliente')
+    x_key = request.POST.get('x_key')
+    x_id_invoice = request.POST.get('x_id_invoice')
+    x_ref_payco = request.POST.get('x_ref_payco')
+    x_transaction_id = request.POST.get('x_transaction_id')
+    x_amount = request.POST.get('x_amount')
+    x_currency_code = request.POST.get('x_currency_code')
+
+    x_cod_response = request.POST.get('x_cod_response')
+
+    signature = '{0}^{1}^{2}^{3}^{4}^{5}'.format(
+                x_cust_id_cliente,
+                x_key,
+                x_ref_payco,
+                x_transaction_id,
+                x_amount,
+                x_currency_code
+            )
+
+    h = hashlib.sha256()
+    h.update(signature.encode('utf-8'))
+    v_signature = h.hexdigest()
+
+    print(x_signature)
+    print(v_signature)
+    ticket = Ticket.objects.filter(pk=int(x_id_invoice)).first()
+    print(ticket)
+
+    if ticket and v_signature == x_signature:
+        ticket.status = int(x_cod_response)
+        ticket.save()
+        return HttpResponse('Gracias por su compra')
+    else:
+        return HttpResponse('Datos no validos')
+
