@@ -129,7 +129,7 @@ def confirmation_view(request):
 
     if (ticket and
         v_signature == x_signature and
-        ticket.total == Decimal(x_amount):
+        ticket.total == Decimal(x_amount)):
 
         ticket.status = Status(int(x_cod_response))
         ticket.save()
