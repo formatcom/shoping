@@ -3,14 +3,15 @@
 Para usar esta proyecto, siga estos pasos:
 
 1. virtualenv env
-2. pip install -r requirements.txt
+2. source env/bin/active
+3. pip install -r requirements.txt
 3. heroku login
 4. heroku local
 5. configurar en el /admin epayco
 
 ## Usuario de prueba
 username: apps.co
-password: password
+password: testings
 
 ## Tarjetas de Credito de Pruebas
 
