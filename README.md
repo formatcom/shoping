@@ -5,8 +5,8 @@ Para usar esta proyecto, siga estos pasos:
 1. virtualenv env
 2. source env/bin/active
 3. pip install -r requirements.txt
-4. python manage migrate
-5. createsuperuser
+4. python manage.py migrate
+5. python manage.py createsuperuser
 6. heroku login
 7. heroku local
 8. configurar en el /admin epayco
