@@ -7,9 +7,14 @@ from django.db.models import Sum
 from .models import Item
 
 
+@csrf_exempt
 class ItemListView(ListView):
     model = Item
     template_name = 'shop/item_list.html'
+
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
+        return self.get(request, args, kwargs)
 
 
 class CarShopListView(ListView):
