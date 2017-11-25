@@ -5,9 +5,11 @@ Para usar esta proyecto, siga estos pasos:
 1. virtualenv env
 2. source env/bin/active
 3. pip install -r requirements.txt
-3. heroku login
-4. heroku local
-5. configurar en el /admin epayco
+4. python manage migrate
+5. createsuperuser
+6. heroku login
+7. heroku local
+8. configurar en el /admin epayco
 
 ## Usuario de prueba
 username: apps.co
@@ -43,6 +45,7 @@ See also, a [ready-made application](https://github.com/heroku/python-getting-st
 
 ## Further Reading
 
+- [heroku-django-template](https://github.com/heroku/heroku-django-template)
 - [Gunicorn](https://warehouse.python.org/project/gunicorn/)
 - [WhiteNoise](https://warehouse.python.org/project/whitenoise/)
 - [dj-database-url](https://warehouse.python.org/project/dj-database-url/)
